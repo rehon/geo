@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView user_history;
     private TextView result;
 
+    private Boolean is_start = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,13 @@ public class MainActivity extends AppCompatActivity {
                     String key = "cea4eb40-3ffa-4cca-a365-7cac27e48127";
                     String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=ru&apikey=" + key;
 
-                    history_string.append(qury).append(", ");
+                    if(is_start == true) {
+                        history_string.append(qury);
+                        is_start = false;
+                    }
+                    else{
+                        history_string.append(", ").append(qury);
+                    }
 
                     user_history.setText(history_string);
 
