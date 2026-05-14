@@ -14,6 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     String qury = user_input.getText().toString();
                     String key = "cea4eb40-3ffa-4cca-a365-7cac27e48127";
-                    String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=en&apikey=" + key;
+                    String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=ru&apikey=" + key;
 
                     user_history.setText(qury);
 
@@ -95,7 +99,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String resulst){
             super.onPostExecute(resulst);
 
-
+            try {
+                JSONObject jsonObject = new JSONObject(resulst);
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                JSONObject jsonObjectItem = jsonArray.getJSONObject(0);
+                result.setText(jsonObjectItem.getJSONObject("title").getString("text"));
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
