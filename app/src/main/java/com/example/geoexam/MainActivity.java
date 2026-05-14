@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -25,6 +27,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         user_history = findViewById(R.id.user_history);
         result = findViewById(R.id.result);
 
+        StringBuilder history_string = new StringBuilder();
+
         main_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     String key = "cea4eb40-3ffa-4cca-a365-7cac27e48127";
                     String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=ru&apikey=" + key;
 
-                    user_history.setText(qury);
+                    history_string.append(qury).append(", ");
+
+                    user_history.setText(history_string);
 
                     new GetDataUrl().execute(url);
                 }
@@ -65,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
     protected class GetDataUrl extends AsyncTask<String, String, String> implements com.example.geoexam.GetDataUrl {
 
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            result.setText("Загрузка данных...");
+        }
 
 
         @Override
@@ -103,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(resulst);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
                 JSONObject jsonObjectItem = jsonArray.getJSONObject(0);
-                result.setText(jsonObjectItem.getJSONObject("title").getString("text"));
+                result.setText(jsonObjectItem.getJSONObject("title").getString("text") + ", " + jsonObjectItem.getJSONObject("subtitle").getString("text"));
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
