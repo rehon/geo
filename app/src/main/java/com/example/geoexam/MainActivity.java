@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
                     String key = "cea4eb40-3ffa-4cca-a365-7cac27e48127";
                     String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=en&apikey=" + key;
 
+                    user_history.setText(qury);
+
                     new GetDataUrl().execute(url);
                 }
             }
