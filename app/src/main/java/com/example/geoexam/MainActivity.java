@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Boolean is_start = true;
 
+    private  String notification = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(user_input.getText().toString().equals("")){
-                    String no_user_input = "Введите пожалуйсто запрос";
-                    Toast.makeText(MainActivity.this, no_user_input, Toast.LENGTH_LONG).show();
+                    notification = "Введите пожалуйсто запрос";
+                    Toast.makeText(MainActivity.this, notification, Toast.LENGTH_LONG).show();
                 }
                 else{
                     String qury = user_input.getText().toString();
