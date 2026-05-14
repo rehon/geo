@@ -2,9 +2,11 @@ package com.example.geoexam;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
         main_btn = findViewById(R.id.main_btn);
         user_history = findViewById(R.id.user_history);
         result = findViewById(R.id.result);
+
+        main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(user_input.getText().toString().equals("")){
+                    String no_user_input = "Введите пожалуйсто запрос";
+                    Toast.makeText(MainActivity.this, no_user_input, Toast.LENGTH_LONG).show();
+                }
+                else{
+                    String qury = user_input.getText().toString();
+                    String key = "cea4eb40-3ffa-4cca-a365-7cac27e48127";
+                    String url = "https://suggest-maps.yandex.ru/v1/suggest?text=" + qury + "&lang=en&apikey=" + key;
+
+                    new GetDataUrl().execute(url);
+                }
+            }
+        });
     }
 
     protected class GetDataUrl extends AsyncTask<String, String, String>{
