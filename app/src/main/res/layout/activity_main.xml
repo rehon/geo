@@ -12,7 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:layout_marginRight="130dp"/>
+            android:layout_marginRight="130dp"
+        android:autofillHints="Ввведите запрос"
+        android:textSize="30dp"/>
 
     <Button
             android:id="@+id/main_btn"

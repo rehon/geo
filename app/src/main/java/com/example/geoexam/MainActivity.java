@@ -57,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected class GetDataUrl extends AsyncTask<String, String, String>{
+    protected class GetDataUrl extends AsyncTask<String, String, String> implements com.example.geoexam.GetDataUrl {
+
+
 
         @Override
         protected String doInBackground(String... strings) {
@@ -85,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+
+        @Override
+        protected void onPostExecute(String resulst){
+            super.onPostExecute(resulst);
+
+
         }
     }
 }
