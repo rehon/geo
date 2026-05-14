@@ -28,17 +28,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
-        android:text="Пример историизапроса"
+        android:text="Здесь будет отобржараться история запроса"
         android:textSize="25dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_history">
 
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_history"
         android:textAlignment="center"
         android:layout_marginTop="20dp"
         android:textSize="30dp"
-        android:text="Пример запроса"/>
+        android:text="Здесь будет отображаться списки адресов"/>
+
+    </ScrollView>
 
 </RelativeLayout>
