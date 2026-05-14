@@ -118,8 +118,12 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(resulst);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
-                JSONObject jsonObjectItem = jsonArray.getJSONObject(0);
-                result.setText(jsonObjectItem.getJSONObject("title").getString("text") + ", " + jsonObjectItem.getJSONObject("subtitle").getString("text"));
+                StringBuilder results_item = new StringBuilder();
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObjectItem = jsonArray.getJSONObject(i);
+                    results_item.append(jsonObjectItem.getJSONObject("title").getString("text") + ", " + jsonObjectItem.getJSONObject("subtitle").getString("text")).append("\n").append("\n");
+                }
+                result.setText(results_item);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
